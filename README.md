@@ -2,6 +2,14 @@
 
 `countrycode` standardizes country names, converts them into one of seven coding schemes, assigns region descriptors, and generates empty dyadic or country-year dataframes from the coding schemes. Scroll down for more details or visit the [countrycode CRAN page](http://cran.r-project.org/web/packages/countrycode/index.html)
 
+If you use `countrycode` in your research, we would be very grateful if you could cite our paper:
+
+> Arel-Bundock, Vincent, Nils Enevoldsen, and CJ Yetman, (2018). countrycode: An R package to convert country names and country codes. Journal of Open Source Software, 3(28), 848, https://doi.org/10.21105/joss.00848
+
+[![DOI](http://joss.theoj.org/papers/10.21105/joss.00848/status.svg)](https://doi.org/10.21105/joss.00848)
+
+[![Travis-CI Build Status](https://travis-ci.org/vincentarelbundock/countrycode.svg?branch=master)](https://travis-ci.org/vincentarelbundock/countrycode)
+
 ## Contributions
 
 Want to contribute? Great! Scroll all the way down for details.
@@ -12,7 +20,7 @@ Different data sources use different coding schemes to represent countries (e.g.
 
 ## The Solution
 
-The countrycode function can convert to and from 7 different country coding schemes. It uses regular expressions to convert long country names (e.g. Sri Lanka) into any of those coding schemes, or into standardized country names (official short English). It can create new variables with the name of the continent and/or region to which each country belongs.
+The `countrycode` function can convert to and from 30+ different country coding schemes, and to 600+ variants of country names in different languages and formats. It uses regular expressions to convert long country names (e.g. Sri Lanka) into any of those coding schemes or country names. It can create new variables with various regional groupings.
 
 ## Supported country codes
 
@@ -20,11 +28,13 @@ To get an up-to-date list of supported country codes, install the package and ty
 
 * 600+ variants of country names in different languages and formats.
 * Correlates of War (numeric and character)
+* Gleditsch & Ward (numeric and character)
 * ISO (2/3-character and numeric)
 * United Nations
 * International Monetary Fund
 * World Bank
 * Polity IV
+* Varieties of Democracy
 * European Central Bank
 * Euro-control (aviation)
 * Eurostat
@@ -41,7 +51,6 @@ To get an up-to-date list of supported country codes, install the package and ty
 ## Installation
 
 From the R console, type ``install.packages("countrycode")``
-
 
 # Examples
 
@@ -207,6 +216,15 @@ countrycode(df$geo, 'iso2c', 'country.name', custom_match = custom_match)
 # Extra arguments
 
 Use `warn = TRUE` to print out a list of source elements for which no match was found. When the source vector are long country names that need to be matched using regular expressions, there is always a risk that multiple regex will match a given string. When this is the case, `countrycode` assigns a value arbitrarily, but the `warn` argument allows the user to print a list of all strings that were matched many times.
+
+Use the `nomatch` argument to specify the value that `countrycode` inserts where no match was found:
+
+```r
+> countrycode(c('DZA', 'USA', '???'), 'iso3c', 'country.name', nomatch = 'BAD CODE')
+> [1] "Algeria"       "United States" "BAD CODE"  
+> countrycode(c('Canada', 'Fake country'), 'country.name', 'iso3c', nomatch = 'BAD')
+> [1] "CAN" "BAD"
+```
 
 # Contributions
 

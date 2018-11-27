@@ -3,7 +3,11 @@ data/backup.rds
 data/dictionary_static.csv
 data/extra
 README.md
+LICENSE*
+joss
 tests
 dictionary
+revdep*
+.travis.yml
 ^.*\.Rproj$
 ^\.Rproj\.user$

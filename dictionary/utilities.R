@@ -1,13 +1,13 @@
 library(pacman)
-p_load(countrycode, janitor, tibble, dplyr, tidyr, readr, readxl, rvest, 
-       RSelenium, httr, jsonlite, zoo)
+p_load(tidyverse, countrycode, janitor, tibble, dplyr, tidyr, readr, readxl,
+       rvest, RSelenium, httr, jsonlite, zoo)
 options(stringsAsFactors=FALSE)
 
 # warn if not running in an UTF-8 locale
 if (! l10n_info()$`UTF-8`) warning('Running in a non-UTF-8 locale!')
 
 #' Use countrycode regexes as unique country IDs
-custom_dict = readr::read_csv('data/dictionary_static.csv', na = '') %>% 
+custom_dict = readr::read_csv('dictionary/data_static.csv', na = '') %>% 
               dplyr::select(country.name.en.regex, country.name.en.regex) 
 CountryToRegex = function(x, warn=TRUE) countrycode(x, 
                                                     'country.name.en.regex', 
